@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affari Tuoi - Gioco</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap'); /* Bungee */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap'); /* Orbitron -> TOP */
+        @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); /* Anton */
+        @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap'); /* Audiowide -> TOP */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Press Start 2P, cursive */
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap'); /* Rubik Glitch */
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap'); /* Black Ops One */
+        @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'); /* Luckiest Guy -> TOP */
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap'); /* Alfa Slab One */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            margin-top: 0px;
+        }
+        .title-image {
+            width: 180px; /* Regola la dimensione delle immagini */
+            height: auto;
+            flex-shrink: 0; /* Impedisce che si ridimensioni automaticamente */
+            position: absolute;
+            top: 80%;
+            transform: translateY(-50%);
+        }
+        .title-image.left {
+            left: 10%;
+        }
+        .title-image.right {
+            right: 10%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 90px;
+            margin-top: 30px;
+            margin-bottom: 0px;
+            color: #2e4053;
+            text-shadow: 0 0 10px #ff6666, 0 0 20px #ff3333, 0 0 40px #ff0000; /* Effetto neon */
+        }
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 5px;
+            margin-bottom: 30px;
+            color: #2e4053;
+        }
+        body {
+            font-family: 'Audiowide', sans-serif, Arial;
+            margin: 0;
+            padding: 0;
+            background-color: #ffefca;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 97%;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .middle-column {
+            width: 6%; /* Colonna sottile */
+            display: flex;
+            border-radius: 5px;
+            flex-direction: column; /* Disposizione verticale */
+            align-items: center; /* Centra le icone orizzontalmente */
+            justify-content: center; /* Centra le icone verticalmente */
+            gap: 50px; /* Distanza tra le icone */
+            background-color: #f1dba7;
+            padding: 10px;
+            /* font-size: 50px; /* Dimensione icona */
+            transition: all 0.3s ease; /* Animazione per transizioni morbide */
+        }
+        .middle-column .icon-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .middle-column .icon-container i {
+            font-size: 50px;
+            transition: all 0.3s ease;
+            color: white; /* Colore icona normale */
+        }
+        .middle-column .icon-container.disattivato i {
+            opacity: 0.3; /* Oscura solo l'icona */
+        }
+        .middle-column .icon-container .cross {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 45px;
+            font-weight: normal;
+            color: red;
+            opacity: 0; /* Nascondi la X inizialmente */
+            pointer-events: none;
+        }
+        .middle-column .icon-container.disattivato .cross {
+            opacity: 1; /* Mostra la X solo quando disattivato */
+            font-weight: normal;
+        }
+        .pacco {
+            width: 620px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            /* transition: background 0.3s, transform 0.3s; */
+            position: relative;
+            overflow: hidden; /* Per evitare che la scritta fuoriesca */
+        }
+        .pacco .text {
+            opacity: 0; /* Nasconde il testo inizialmente */
+            position: absolute;
+            font-size: 14px;
+            color: white;
+            transform: rotateY(180deg); /* Nasconde il testo con la rotazione */
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .pacco .number {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 2s ease-in-out;
+        }
+        .pacco .title {
+            opacity: 0; /* Nasconde il titolo quando il pacco è "flipped" */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .pacco .drinks {
+            opacity: 0; /* Nasconde i drinks quando il pacco è "flipped" */
+        }
+        .dark {
+            filter: brightness(0.3) contrast(1.5);
+        }
+        .flipped .title {
+            opacity: 1; /* Mostra il testo quando il pacco è "aperto" */
+            transform: rotateY(0deg); /* Ruota il testo per farlo vedere */
+            font-size: 24px;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 2.5s ease-in-out;
+        }
+        .flipped .text {
+            opacity: 0; /* Nasconde il titolo quando il pacco è "flipped" */
+        }
+        .flipped .number {
+            opacity: 0; /* Nasconde il numero quando il pacco è "flipped" */
+        }
+        .flipped .drinks {
+            opacity: 0; /* Nasconde i drinks quando il pacco è "flipped" */
+        }
+        .open .text {
+            opacity: 1; /* Mostra il testo quando il pacco è "aperto" */
+            transform: rotateY(0deg); /* Ruota il testo per farlo vedere */
+            font-size: 14px;
+            font-weight: normal;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .open .title {
+            opacity: 0; /* Nasconde il titolo quando il pacco è "flipped" */
+            transition: none;
+        }
+        .open .number {
+            opacity: 0; /* Nasconde il numero quando il pacco è "flipped" */
+        }        
+        .open .drinks {
+            opacity: 1;
+        }
+        .used {
+            filter: brightness(0.3); /* Oscura il pacco "usato" oscurandolo */
+        }
+        footer {
+            margin-top: 0px;
+            display: flex;
+            justify-content: center; /* Centra orizzontalmente i contenuti nel footer */
+            align-items: center; /* Centra verticalmente i contenuti nel footer */
+            width: 95%; /* Imposta la larghezza del footer al 100% */
+            padding: 0; /* Rimuovi eventuali padding extra */
+            color: #2e4053;
+            background-color: #ffefca;
+        }
+        div.split3 {
+            margin-bottom: 0px;
+            display: flex; /* Usa flexbox per distribuire i div orizzontalmente */
+            justify-content: center; /* Centra orizzontalmente i div */
+            width: 60%; /* Assicura che il contenitore prenda tutta la larghezza disponibile */
+        }
+        div.split3 div {
+            float: center;
+            width: 33%; /* Imposta la larghezza di ciascun div al 33% */
+            text-align: center; /* Centra il testo all'interno dei div */
+            font-size: 20px;
+            padding: 0 2%; /* Padding per dare spazio tra i div */
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <img src="imageedit_1_5637906376.png" class="title-image left" alt="Immagine Sinistra">
+        <h1>CAZZI TUOI</h1>
+        <img src="pngegg.png" class="title-image right" alt="Immagine Destra">
+    </div>
+    <h2>Hai voluto laurearti eh... 😜</h2>
+    <div class="wrapper">
+        <div class="column left">
+            <div class="pacco" style="background-color: #00f2ff;" onclick="togglePacco(this)">
+                <div class="title"><i>"Co-me un tuooooonoo..." </i><span style="font-size: 30px;">&nbsp;🎤</span></div>
+                <div class="text">Sappiamo che sei un vero fan di Rose Villain, e che la tua passione per lei è puramente musicale, ma quanto ne sai del suo tormentone più celebre?<br>Canta per noi il ritornello. ( 🥃 )</div>
+                <div class="number">1</div>
+            </div>
+            <div class="pacco" style="background-color: #2cdcff;" onclick="togglePacco(this)">
+                <div class="title">Amici amici e poi... <span style="font-size: 30px;">&nbsp;&nbsp;🗡️</span></div>
+                <div class="text">A Lido degli Estensi tutti contavano su di te per del sano divertimento. Ma qualcosa è andato storto, e un povero ragazzo ha rischiato la vita. Chiedi perdono alla vittima mettendoti in 3 posizioni a sua scelta. ( 3x🍷 )</div>
+                <div class="number">2</div>
+            </div>
+            <div class="pacco" style="background-color: #2cc0ff;" onclick="togglePacco(this)">
+                <div class="title"><i>"4-1. Asensio. È finita." </i><span style="font-size: 30px;">&nbsp;&nbsp;🪦</span></div>
+                <div class="text">Quella di Cardiff è stata una delle peggiori delusioni della tua vita. Doveroso quindi ricordartela stasera. Quale formazione schierò la Juventus quella notte, e quali furono i marcatori? ( ?x🍷 )</div>
+                <div class="number">3</div>
+            </div>
+            <div class="pacco" style="background-color: #0099ff;" onclick="togglePacco(this)">
+                <div class="title"><i>"Sei intenditore di ippica?" <span style="font-size: 30px;">&nbsp;🏇</span></i></div>
+                <div class="text">Punta sul cavallo vincente: scegli uno dei concorrenti e lascia che chiami il prossimo pacco al posto tuo. Attento, la penitenza spetterà comunque a te!</div>
+                <div class="number">4</div>
+            </div>
+            <div class="pacco" style="background-color: #0066ff;" onclick="togglePacco(this)">
+                <div class="title">Pelle "Lelle" Adani <span style="font-size: 30px;">&nbsp;&nbsp;🧔🏻‍♀️</span></div>
+                <div class="text">Parla come Lele Adani per le prossime due chiamate (e relative penitenze). Inserisci nel discorso le sue massime più famose (“la garra charrua”, “è un giocatore differente”, “insisti?!”), ma fallo sempre contestualmente. ( 🍷🍷🍷 )</div>
+                <div class="number">5</div>
+            </div>
+            <div class="pacco" style="background-color: #0033ff;" onclick="togglePacco(this)">
+                <div class="title">Il polemico <span style="font-size: 30px;">&nbsp;&nbsp;🤐</span></div>
+                <div class="text">5 dei presenti sputeranno fatti. Ogni volta che controbatti bevi. ( ?x🥃 )</div>
+                <div class="number">6</div>
+            </div>
+            <div class="pacco" style="background-color: #0000cc;" onclick="togglePacco(this)">
+                <div class="title">Come una finale <span style="font-size: 30px;">&nbsp;🏆</span></div>
+                <div class="text">Scegli 5 amici da sfidare a “sasso, carta, forbici”. Affronta<br>la partita come la Juve affronta le finali di Champions.<br>Se perdi sei salvo, ogni volta che vinci bevi. ( ?x🍷 )</div>
+                <div class="number">7</div>
+            </div>
+            <div class="pacco" style="background-color: #000099;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 7</div>
+                <div class="number">8</div>
+            </div>
+        </div>
+        <div class="middle-column">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/css/ionicons.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+            <div class="icon-container" onclick="toggleIcon(this)">
+                <i class="material-icons" style="color: #00b218; text-shadow: 0 0 10px #66ff66, 0 0 20px #33ff33, 0 0 40px #00ff00;">group</i> <!-- Cambia l'icona con quella che preferisci -->
+                <span class="cross">X</span>
+            </div>
+            <div class="icon-container" onclick="toggleIcon(this)">
+                <i class="material-icons" style="color: #9000cd; text-shadow: 0 0 10px #9966ff, 0 0 20px #6633ff, 0 0 40px #3300ff;">update</i>  <!-- Cambia l'icona con quella che preferisci -->
+                <span class="cross">X</span>
+            </div>
+            <div class="icon-container" onclick="toggleIcon(this)">
+                <i class="material-icons" style="color: #cd0000; text-shadow: 0 0 10px #ff6666, 0 0 20px #ff3333, 0 0 40px #ff0000;">sos</i> <!-- Cambia l'icona con quella che preferisci -->
+                <span class="cross">X</span>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="pacco" style="background-color: #f1d711;" onclick="togglePacco(this)">
+                <div class="title"><i>"Di horto muso" </i><span style="font-size: 30px;">&nbsp;&nbsp;🐴</span></div>
+                <div class="text">”Nelle corse dei cavalli basta mettere il musetto davanti; non c’è bisogno di vincere di 100: musetto davanti, il muso, fotografia corto muso".<br>Scegli un altro concorrente (non astemio): bevi uno shot in più di lui. ( 🍹 )</div>
+                <div class="number">9</div>
+            </div>
+            <div class="pacco" style="background-color: #eebb00;" onclick="togglePacco(this)">
+                <div class="title"><i>"Si salta l'uomo, si va in porta!" </i><span style="font-size: 30px;">&nbsp;&nbsp;⚽️</span></div>
+                <div class="text">Scegli un partecipante da persuadere con le tue doti da rimorchiatore.<br>Devi essere convincente, se "jogi una mierda" bevi. ( 🥃🥃 ) </div>
+                <div class="number">10</div>
+            </div>
+            <div class="pacco" style="background-color: #e49400;" onclick="togglePacco(this)">
+                <div class="title"><i>"Di horto muso" </i><span style="font-size: 30px;">&nbsp;&nbsp;🐴</span></div>
+                <div class="text">”Nelle corse dei cavalli basta mettere il musetto davanti; non c’è bisogno di vincere di 100: musetto davanti, il muso, fotografia corto muso".<br>Scegli un altro concorrente (non astemio): bevi uno shot in più di lui. ( 🍹 )</div>
+                <div class="number">11</div>
+            </div>
+            <div class="pacco" style="background-color: #ff7f00;" onclick="togglePacco(this)">
+                <div class="title">LGBBQ+ <span style="font-size: 30px;">&nbsp;🌭</span></div>
+                <div class="text">Da poco hai riscoperto la tua vera natura, ma l'hai condivisa solo con alcuni: bacia sulle labbra tutti gli altri. ( ?x🥃 )</div>
+                <div class="number">12</div>
+            </div>
+            <div class="pacco" style="background-color: #ff5500;" onclick="togglePacco(this)">
+                <div class="title">Immondizia al posto del cuore <span style="font-size: 30px;">&nbsp;🧃</span></div>
+                <div class="text">“Se non hai la personalità per stare in questi palcoscenici te ne stai con tua moglie, ti mangi le tue patatine, ti bevi la Sprite, la Coca-Cola o i fruttini, e ti guardi lo spettacolo.” Goditi questo cocktail insieme alla tua dolce metà. ( 🍹 )</div>
+                <div class="number">13</div>
+            </div>
+            <div class="pacco" style="background-color: #ff2a00;" onclick="togglePacco(this)">
+                <div class="title">Pablo Esco-al-bar <span style="font-size: 30px;">&nbsp;❄️</span></div>
+                <div class="text">Rispolvera le tue radici sudamericane: scegli qualcosa di inalabile e fatti una pippata. ( 🥃🥃 )</div>
+                <div class="number">14</div>
+            </div>
+            <div class="pacco" style="background-color: #cc1100;" onclick="togglePacco(this)">
+                <div class="title">Quel funesto 26 aprile 1998 <span style="font-size: 30px;">&nbsp;&nbsp;💙🖤</span></div>
+                <div class="text">Torino. Stadio Delle Alpi. Minuto 70. Iuliano abbatte Ronaldo in piena area ma l’arbitro non assegna il calcio di rigore. Indossa la maglia nerazzurra e, cantando “Amala, pazza Inter amala…”, schiantati contro gli interisti presenti. ( 🥃🥃🥃/🍹 )</div>
+                <div class="number">15</div>
+            </div>
+            <div class="pacco" style="background-color: #a50000;" onclick="togglePacco(this)">
+                <div class="title">Torbole Casaglia <span style="font-size: 30px;">&nbsp;🦩</span></div>
+                <div class="text">La tua passione per i fenicotteri è cosa nota, così come quella di Gnesa.<br>Rievoca la grande mossa con uno dei partecipanti (pss… abbiamo pensato ad un aiutino per farti calare meglio nella parte, non c’è di che! 😉) ( 🍹🍹 )</div>
+                <div class="number">16</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function togglePacco(element) {
+            // Cambia tra i tre stati: chiuso, aperto, usato
+            if (element.classList.contains('used')) {
+                // Stato 4: pacco usato - oscura
+                element.classList.remove('used');
+                element.classList.remove('open');
+                element.classList.remove('flipped');
+            } else if (element.classList.contains('open')) {
+                // Stato 3: pacco aperto - mostra il testo
+                element.classList.add('used'); // Oscura il pacco dopo averlo aperto
+            } else if (element.classList.contains('flipped')) {
+                // Stato 2: pacco aperto - mostra il titolo
+                element.classList.add('open'); // Svela il testo
+            } else {
+                // Stato 1: pacco chiuso - mostra solo il numero
+                element.classList.add('flipped'); // Ruota il pacco per mostrare il titolo
+            }
+        }
+        function toggleIcon(element) {
+            element.classList.toggle("disattivato");
+        }        
+    </script>
+</body>
+<footer>
+    <div class="split3">
+        <div>
+            <p>🥃 = shottino</p>
+        </div>
+        <div>
+            <p>🍷 = sorso</p>
+        </div>
+        <div>
+            <p>🍹 = intero drink</p>
+        </div>
+    </div>
+</footer>
+</html>
