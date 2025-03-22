@@ -20,10 +20,10 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            margin-top: 0px;
+            margin-top: 20px;
         }
         .title-image {
-            width: 180px; /* Regola la dimensione delle immagini */
+            width: 200px; /* Regola la dimensione delle immagini */
             height: auto;
             flex-shrink: 0; /* Impedisce che si ridimensioni automaticamente */
             position: absolute;
@@ -48,7 +48,7 @@
             text-align: center;
             font-size: 30px;
             margin-top: 5px;
-            margin-bottom: 30px;
+            margin-bottom: 60px;
             color: #2e4053;
         }
         body {
@@ -65,12 +65,12 @@
         .wrapper {
             display: flex;
             justify-content: space-between;
-            width: 97%;
+            width: 95%;
         }
         .column {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
         .middle-column {
             width: 6%; /* Colonna sottile */
@@ -114,10 +114,8 @@
             font-weight: normal;
         }
         .pacco {
-            width: 620px;
-            height: 60px;
-            display: flex;
-            flex-direction: column;
+            width: 600px;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -168,7 +166,7 @@
         .flipped .title {
             opacity: 1; /* Mostra il testo quando il pacco è "aperto" */
             transform: rotateY(0deg); /* Ruota il testo per farlo vedere */
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             justify-content: center;
             align-items: center;
@@ -206,29 +204,6 @@
         .used {
             filter: brightness(0.3); /* Oscura il pacco "usato" oscurandolo */
         }
-        footer {
-            margin-top: 0px;
-            display: flex;
-            justify-content: center; /* Centra orizzontalmente i contenuti nel footer */
-            align-items: center; /* Centra verticalmente i contenuti nel footer */
-            width: 95%; /* Imposta la larghezza del footer al 100% */
-            padding: 0; /* Rimuovi eventuali padding extra */
-            color: #2e4053;
-            background-color: #ffefca;
-        }
-        div.split3 {
-            margin-bottom: 0px;
-            display: flex; /* Usa flexbox per distribuire i div orizzontalmente */
-            justify-content: center; /* Centra orizzontalmente i div */
-            width: 60%; /* Assicura che il contenitore prenda tutta la larghezza disponibile */
-        }
-        div.split3 div {
-            float: center;
-            width: 33%; /* Imposta la larghezza di ciascun div al 33% */
-            text-align: center; /* Centra il testo all'interno dei div */
-            font-size: 20px;
-            padding: 0 2%; /* Padding per dare spazio tra i div */
-        }
     </style>
 </head>
 <body>
@@ -240,44 +215,33 @@
     <h2>Hai voluto laurearti eh... 😜</h2>
     <div class="wrapper">
         <div class="column left">
-            <div class="pacco" style="background-color: #00f2ff;" onclick="togglePacco(this)">
-                <div class="title"><i>"Co-me un tuooooonoo..." </i><span style="font-size: 30px;">&nbsp;🎤</span></div>
-                <div class="text">Sappiamo che sei un vero fan di Rose Villain, e che la tua passione per lei è puramente musicale, ma quanto ne sai del suo tormentone più celebre?<br>Canta per noi il ritornello. ( 🥃 )</div>
+            <div class="pacco" style="background-color: #00ffff;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 1</div>
                 <div class="number">1</div>
             </div>
-            <div class="pacco" style="background-color: #2cdcff;" onclick="togglePacco(this)">
-                <div class="title">Amici amici e poi... <span style="font-size: 30px;">&nbsp;&nbsp;🗡️</span></div>
-                <div class="text">A Lido degli Estensi tutti contavano su di te per del sano divertimento. Ma qualcosa è andato storto, e un povero ragazzo ha rischiato la vita. Chiedi perdono alla vittima mettendoti in 3 posizioni a sua scelta. ( 3x🍷 )</div>
+            <div class="pacco" style="background-color: #00ccff;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 2</div>
                 <div class="number">2</div>
             </div>
-            <div class="pacco" style="background-color: #2cc0ff;" onclick="togglePacco(this)">
-                <div class="title"><i>"4-1. Asensio. È finita." </i><span style="font-size: 30px;">&nbsp;&nbsp;🪦</span></div>
-                <div class="text">Quella di Cardiff è stata una delle peggiori delusioni della tua vita. Doveroso quindi ricordartela stasera. Quale formazione schierò la Juventus quella notte, e quali furono i marcatori? ( ?x🍷 )</div>
+            <div class="pacco" style="background-color: #0099ff;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 3</div>
                 <div class="number">3</div>
             </div>
-            <div class="pacco" style="background-color: #0099ff;" onclick="togglePacco(this)">
-                <div class="title"><i>"Sei intenditore di ippica?" <span style="font-size: 30px;">&nbsp;🏇</span></i></div>
-                <div class="text">Punta sul cavallo vincente: scegli uno dei concorrenti e lascia che chiami il prossimo pacco al posto tuo. Attento, la penitenza spetterà comunque a te!</div>
+            <div class="pacco" style="background-color: #0066ff;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 4</div>
                 <div class="number">4</div>
             </div>
-            <div class="pacco" style="background-color: #0066ff;" onclick="togglePacco(this)">
-                <div class="title">Pelle "Lelle" Adani <span style="font-size: 30px;">&nbsp;&nbsp;🧔🏻‍♀️</span></div>
-                <div class="text">Parla come Lele Adani per le prossime due chiamate (e relative penitenze). Inserisci nel discorso le sue massime più famose (“la garra charrua”, “è un giocatore differente”, “insisti?!”), ma fallo sempre contestualmente. ( 🍷🍷🍷 )</div>
+            <div class="pacco" style="background-color: #0033ff;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 5</div>
                 <div class="number">5</div>
             </div>
-            <div class="pacco" style="background-color: #0033ff;" onclick="togglePacco(this)">
-                <div class="title">Il polemico <span style="font-size: 30px;">&nbsp;🤐</span></div>
-                <div class="text">5 dei presenti sputeranno fatti. Ogni volta che controbatti bevi. ( ?x🥃 )</div>
-                <div class="number">6</div>
-            </div>
             <div class="pacco" style="background-color: #0000cc;" onclick="togglePacco(this)">
-                <div class="title">Come una finale <span style="font-size: 30px;">&nbsp;🏆</span></div>
-                <div class="text">Scegli 5 amici da sfidare a “sasso, carta, forbici”. Affronta<br>la partita come la Juve affronta le finali di Champions.<br>Se perdi sei salvo, ogni volta che vinci bevi. ( ?x🍷 )</div>
-                <div class="number">7</div>
+                <div class="text">Contenuto 6</div>
+                <div class="number">6</div>
             </div>
             <div class="pacco" style="background-color: #000099;" onclick="togglePacco(this)">
                 <div class="text">Contenuto 7</div>
-                <div class="number">8</div>
+                <div class="number">7</div>
             </div>
         </div>
         <div class="middle-column">
@@ -297,47 +261,42 @@
                 <i class="material-icons" style="color: #cd0000; text-shadow: 0 0 10px #ff6666, 0 0 20px #ff3333, 0 0 40px #ff0000;">sos</i> <!-- Cambia l'icona con quella che preferisci -->
                 <span class="cross">X</span>
             </div>
+            <div class="text" style="font-size: 8px;">
+                Legenda:<br>
+                - 🥃 = shottino<br>
+                - 🍹 = intero drink<br>
+                - 🍷 = sorso<br>
+            </div>
         </div>
         <div class="column right">
-            <div class="pacco" style="background-color: #f1d711;" onclick="togglePacco(this)">
-                <div class="title"><i>"Di horto muso" </i><span style="font-size: 30px;">&nbsp;&nbsp;🐴</span></div>
-                <div class="text">”Nelle corse dei cavalli basta mettere il musetto davanti; non c’è bisogno di vincere di 100: musetto davanti, il muso, fotografia corto muso".<br>Scegli un altro concorrente (non astemio): bevi uno shot in più di lui. ( 🍹 )</div>
+            <div class="pacco" style="background-color: #c49a00;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 8</div>
+                <div class="number">8</div>
+            </div>
+            <div class="pacco" style="background-color: #e48f00;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 9</div>
                 <div class="number">9</div>
             </div>
-            <div class="pacco" style="background-color: #eebb00;" onclick="togglePacco(this)">
-                <div class="title"><i>"Si salta l'uomo, si va in porta!" </i><span style="font-size: 30px;">&nbsp;&nbsp;⚽️</span></div>
-                <div class="text">Scegli un partecipante da persuadere con le tue doti da rimorchiatore.<br>Devi essere convincente, se "jogi una mierda" bevi. ( 🥃🥃 ) </div>
+            <div class="pacco" style="background-color: #ff7f00;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 10</div>
                 <div class="number">10</div>
             </div>
-            <div class="pacco" style="background-color: #e49400;" onclick="togglePacco(this)">
-                <div class="title"><i>"Di horto muso" </i><span style="font-size: 30px;">&nbsp;&nbsp;🐴</span></div>
-                <div class="text">”Nelle corse dei cavalli basta mettere il musetto davanti; non c’è bisogno di vincere di 100: musetto davanti, il muso, fotografia corto muso".<br>Scegli un altro concorrente (non astemio): bevi uno shot in più di lui. ( 🍹 )</div>
+            <div class="pacco" style="background-color: #ff5500;" onclick="togglePacco(this)">
+                <div class="title">"Si salta l'uomo, si va in porta!" ⚽️</div>
+                <div class="text">Scegli un partecipante da persuadere con le tue doti da rimorchiatore.<br>Devi essere convincente, se "jogi una mierda" bevi.<br>🥃🥃🥃</div>
                 <div class="number">11</div>
             </div>
-            <div class="pacco" style="background-color: #ff7f00;" onclick="togglePacco(this)">
-                <div class="title">LGBBQ+ <span style="font-size: 30px;">&nbsp;🌭</span></div>
-                <div class="text">Da poco hai riscoperto la tua vera natura, ma l'hai condivisa solo con alcuni: bacia sulle labbra tutti gli altri. ( ?x🥃 )</div>
+            <div class="pacco" style="background-color: #ff2a00;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 12</div>
                 <div class="number">12</div>
             </div>
-            <div class="pacco" style="background-color: #ff5500;" onclick="togglePacco(this)">
-                <div class="title">Immondizia al posto del cuore <span style="font-size: 30px;">&nbsp;🧃</span></div>
-                <div class="text">“Se non hai la personalità per stare in questi palcoscenici te ne stai con tua moglie, ti mangi le tue patatine, ti bevi la Sprite, la Coca-Cola o i fruttini, e ti guardi lo spettacolo.” Goditi questo cocktail insieme alla tua dolce metà. ( 🍹 )</div>
+            <div class="pacco" style="background-color: #cc1100;" onclick="togglePacco(this)">
+                <div class="text">Contenuto 13</div>
                 <div class="number">13</div>
             </div>
-            <div class="pacco" style="background-color: #ff2a00;" onclick="togglePacco(this)">
-                <div class="title">Pablo Esco-al-bar <span style="font-size: 30px;">&nbsp;❄️</span></div>
-                <div class="text">Rispolvera le tue radici sudamericane: scegli qualcosa di inalabile e fatti una pippata. ( 🥃🥃 )</div>
-                <div class="number">14</div>
-            </div>
-            <div class="pacco" style="background-color: #cc1100;" onclick="togglePacco(this)">
-                <div class="title">Quel funesto 26 aprile 1998 <span style="font-size: 30px;">&nbsp;&nbsp;💙🖤</span></div>
-                <div class="text">Torino. Stadio Delle Alpi. Minuto 70. Iuliano abbatte Ronaldo in piena area ma l’arbitro non assegna il calcio di rigore. Indossa la maglia nerazzurra e, cantando “Amala, pazza Inter amala…”, schiantati contro gli interisti presenti. ( 🥃🥃🥃/🍹 )</div>
-                <div class="number">15</div>
-            </div>
             <div class="pacco" style="background-color: #a50000;" onclick="togglePacco(this)">
-                <div class="title">Torbole Casaglia <span style="font-size: 30px;">&nbsp;🦩</span></div>
-                <div class="text">La tua passione per i fenicotteri è cosa nota, così come quella di Gnesa.<br>Rievoca la grande mossa con uno dei partecipanti (pss… abbiamo pensato ad un aiutino per farti calare meglio nella parte, non c’è di che! 😉) ( 🍹🍹 )</div>
-                <div class="number">16</div>
+                <div class="text">Contenuto 14</div>
+                <div class="number">14</div>
             </div>
         </div>
     </div>
@@ -365,17 +324,4 @@
         }        
     </script>
 </body>
-<footer>
-    <div class="split3">
-        <div>
-            <p>🥃 = shottino</p>
-        </div>
-        <div>
-            <p>🍷 = sorso</p>
-        </div>
-        <div>
-            <p>🍹 = intero drink</p>
-        </div>
-    </div>
-</footer>
 </html>

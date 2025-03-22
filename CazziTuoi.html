@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affari Tuoi - Gioco</title>
+    <style>
+        h1 {
+            text-align: center; /* Centra il testo orizzontalmente */
+            font-size: 100px; /* Imposta una grandezza per il titolo */
+            margin-top: 30px; /* Aggiunge uno spazio sopra il titolo */
+            margin-bottom: 5px; /* Aggiunge uno spazio sotto il titolo */
+        }
+        h2 {
+            text-align: center; /* Centra il testo orizzontalmente */
+            font-size: 20px; /* Imposta una grandezza per il titolo */
+            margin-top: 5px; /* Aggiunge uno spazio sopra il titolo */
+            margin-bottom: 60px; /* Aggiunge uno spazio sotto il titolo */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra il contenuto orizzontalmente */
+            justify-content: flex-start; /* Allinea il contenuto al top */
+            height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 90%; /* La larghezza del contenitore */
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .pacco {
+            width: 300px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, opacity 0.3s, transform 0.6s;
+            position: relative; /* Aggiungi questa per il contenuto dietro */
+            transform-style: preserve-3d; /* Per la rotazione 3D */
+        }
+        .pacco .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333; /* Colore di sfondo per il retro */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            visibility: hidden; /* Inizialmente invisibile */
+            transform: rotateY(180deg); /* Ruota il testo dietro */
+        }
+        .pacco.flipped {
+            transform: rotateY(180deg); /* Ruota il pacco quando cliccato */
+        }
+        .dark { filter: brightness(0.3); }
+    </style>
+</head>
+<body>
+    <h1>CAZZI TUOI</h1>
+    <h2>Hai voluto laurearti eh...</h2>
+    <div class="wrapper">
+        <div class="column left">
+            <div class="pacco" style="background-color: #00ffff;" onclick="togglePacco(this)">
+                1
+                <div class="back">Testo 1</div>
+            </div>
+            <div class="pacco" style="background-color: #00ccff;" onclick="togglePacco(this)">
+                2
+                <div class="back">Testo 2</div>
+            </div>
+            <div class="pacco" style="background-color: #0099ff;" onclick="togglePacco(this)">
+                3
+                <div class="back">Testo 3</div>
+            </div>
+            <div class="pacco" style="background-color: #0066ff;" onclick="togglePacco(this)">
+                4
+                <div class="back">Testo 4</div>
+            </div>
+            <div class="pacco" style="background-color: #0033ff;" onclick="togglePacco(this)">
+                5
+                <div class="back">Testo 5</div>
+            </div>
+            <div class="pacco" style="background-color: #0000cc;" onclick="togglePacco(this)">
+                6
+                <div class="back">Testo 6</div>
+            </div>
+            <div class="pacco" style="background-color: #000099;" onclick="togglePacco(this)">
+                7
+                <div class="back">Testo 7</div>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="pacco" style="background-color: #c49a00;" onclick="togglePacco(this)">
+                8
+                <div class="back">Testo 8</div>
+            </div>
+            <div class="pacco" style="background-color: #e48f00;" onclick="togglePacco(this)">
+                9
+                <div class="back">Testo 9</div>
+            </div>
+            <div class="pacco" style="background-color: #ff7f00;" onclick="togglePacco(this)">
+                10
+                <div class="back">Testo 10</div>
+            </div>
+            <div class="pacco" style="background-color: #ff5500;" onclick="togglePacco(this)">
+                11
+                <div class="back">Testo 11</div>
+            </div>
+            <div class="pacco" style="background-color: #ff2a00;" onclick="togglePacco(this)">
+                12
+                <div class="back">Testo 12</div>
+            </div>
+            <div class="pacco" style="background-color: #cc1100;" onclick="togglePacco(this)">
+                13
+                <div class="back">Testo 13</div>
+            </div>
+            <div class="pacco" style="background-color: #a50000;" onclick="togglePacco(this)">
+                14
+                <div class="back">Testo 14</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePacco(element) {
+            // Se il pacco è già oscurato, non fare nulla
+            if (element.classList.contains('dark')) {
+                return;
+            }
+            // Aggiungi la classe 'flipped' per ruotare il pacco e mostrare il retro
+            element.classList.toggle('flipped');
+            // Svela il testo dietro (solo quando il pacco è ruotato)
+            let back = element.querySelector('.back');
+            back.style.visibility = back.style.visibility === 'visible' ? 'hidden' : 'visible';
+        }
+    </script>
+</body>
+</html>
